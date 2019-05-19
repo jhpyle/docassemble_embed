@@ -1,0 +1,77 @@
+<?php
+
+function docassemble_embed_help($path, $arg) {
+    switch ($path) {
+    case "admin/help#docassemble_embed":
+        return t("Integrates a docassemble interview in a Drupal page.");
+        break;
+    }
+}
+
+function docassemble_embed_block_info() {
+    $blocks = array();
+    $blocks['docassemble_embed_embed_block'] = array(
+        'info' => t('Embed Docassemble interview'),
+        'cache' => DRUPAL_NO_CACHE,
+    );
+    return $blocks;
+}
+
+function docassemble_embed_block_configure($delta='') {
+    $form = array();
+
+    switch($delta) {
+    case 'docassemble_embed_embed_block' :
+        $form['docassemble_url'] = array(
+            '#type' => 'textfield',
+            '#title' => t('URL of Docassemble server (e.g., https://demo.docassemble.org)'),
+            '#size' => 128,
+            '#default_value' => variable_get('docassemble_url', ''),
+        );
+        $form['interview'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Interview path (e.g., docassemble.demo:data/questions/questions.yml)'),
+            '#size' => 128,
+            '#default_value' => variable_get('interview', ''),
+        );
+        $form['style'] = array(
+            '#type' => 'textfield',
+            '#title' => t('CSS style of iframe'),
+            '#size' => 128,
+            '#default_value' => variable_get('style', 'border-style: solid; border-width: 1px; border-color: #aaa; width: 100%; height: 95vh;'),
+        );
+        break;
+    }
+    return $form;
+}
+
+function docassemble_embed_block_save($delta = '', $edit = array()) {
+    switch($delta) {
+    case 'docassemble_embed_embed_block' :
+        variable_set('docassemble_url', rtrim(preg_replace('/\s+/', '', $edit['docassemble_url']), '/'));
+        variable_set('interview', preg_replace('/\s+/', '', $edit['interview']));
+        variable_set('style', $edit['style']);
+        break;
+    }
+}
+
+function docassemble_embed_block_view($delta='') {
+    $block = array();
+
+    switch($delta) {
+    case 'docassemble_embed_embed_block' :
+        $url = variable_get('docassemble_url', '');
+        $interview = urlencode(variable_get('interview', ''));
+        $style = variable_get('style', '');
+        $block['subject'] = t("The interview");
+        $block['content'] = array(
+            'the_block' => array(
+                '#type' => 'markup',
+                '#markup' => '<iframe style="' . $style . '" src="' . $url . '/interview?i=' . $interview . '"></iframe>',
+                '#suffix' => '',
+            ),
+        );
+        break;
+    }
+    return $block;
+}
