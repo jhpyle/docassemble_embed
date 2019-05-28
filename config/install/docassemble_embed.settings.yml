@@ -1,0 +1,8 @@
+docassemble_embed:
+  server: 'https://demo.docassemble.org'
+  interview: 'docassemble.demo:data/questions/questions.yml'
+  style: 'border-style: solid; border-width: 1px; border-color: #aaa; width: 100%; min-height: 95vh;'
+  mode: iframe
+  bootstrap: '/static/bootstrap/css/bootstrap.min.css'
+  wide: checked
+  hide: checked

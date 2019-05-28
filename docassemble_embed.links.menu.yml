@@ -1,0 +1,6 @@
+docassemble_embed.settings_form:
+  title: 'Docassemble embed configuration'
+  route_name: docassemble_embed.settings_form
+  description: 'Docassemble settings'
+  parent: system.admin_config_system
+  weight: 99  

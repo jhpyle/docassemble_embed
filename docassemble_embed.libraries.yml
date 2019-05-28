@@ -1,0 +1,19 @@
+docassemble-jquery:
+  version: 1.x
+  js:
+    js/restoreJQuery.js: {preprocess: false}
+  dependencies:
+    - core/jquery
+docassemble-assets:
+  version: 1.x
+  js: {}
+  css: {}
+  dependencies:
+    - core/jquery
+docassemble-interview:
+  version: 1.x
+  js:
+    js/include.js: {preprocess: false}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
