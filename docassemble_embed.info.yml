@@ -1,8 +1,8 @@
 name: Docassemble Interviews
+type: module
 description: Embedding of Docassemble interviews
 package: Custom
-type: module
-version: 0.0.1
-core: 9.x
+version: 0.0.2
+core_version_requirement: ^8 || ^9
 dependencies:
   - fontawesome
