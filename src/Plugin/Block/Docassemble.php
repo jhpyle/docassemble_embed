@@ -43,7 +43,7 @@ class Docassemble extends BlockBase implements BlockPluginInterface {
                 '#context' => array(
                     'url' => $url,
                     'style' => $style,
-                    'interview' => urlencode($interview),
+                    'interview' => $interview,
                 ),
             );
         }
@@ -76,7 +76,7 @@ class Docassemble extends BlockBase implements BlockPluginInterface {
                         'docassemble_embed/docassemble-assets',
                         'docassemble_embed/docassemble-interview',
                     ),
-                    'drupalSettings' => array('docassembleUrl' => $url . '/interview?i=' . urlencode($interview) . '&js_target=dablock'),
+                    'drupalSettings' => array('docassembleUrl' => $url . '/interview?i=' . $interview . '&js_target=dablock'),
                 ),
             );
         }
